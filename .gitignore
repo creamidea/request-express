@@ -88,3 +88,4 @@ ENV/
 # Rope project settings
 .ropeproject
 list_waybill.txt
+result.txt
