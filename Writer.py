@@ -4,6 +4,7 @@
 import os
 
 def Writer (filename = 'result.txt', limit=10):
+
     f = open(filename, 'a')
     print('The result will be stored in [{filename}]'.format(filename=filename))
     count = [0] # int 无法被下面函数读取，python3可以用 nonlocal
@@ -11,8 +12,10 @@ def Writer (filename = 'result.txt', limit=10):
     # @param {Queue} container store the results
     # @param {string} state doing/done
     def _write(container, state='doing'):
-        result = []
+
         if container.qsize() is limit or state is 'done':
+            result = []
+
             if state is 'done':
                 _range = range(container.qsize())
             else:
