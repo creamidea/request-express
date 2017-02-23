@@ -17,15 +17,21 @@ from Writer import Writer
 
 def worker():
     global proxylist, proxy, fetch, writer, q, container
+
     while True:
+
+        if q.empty():
+            break
+
         item = q.get()
         if item is None or item is '':
             q.task_done()
-            break
+            continue
+
+        sleep(random())
         print('fetching {item}'.format(item=item))
         package = fetch(item, proxy)
 
-        sleep(random())
         if package['error_code'] is '0':
             record = package['data']['info']['context'][0]
             last_info = '{item}\t{time}\t{desc}'.format(item=item, time=record['time'], desc=record['desc'])
@@ -70,6 +76,7 @@ if __name__ == '__main__':
             t = Thread(target=worker)
             t.daemon = True
             t.start()
+            t.join()
 
         q.join()
         writer(container, 'done')
