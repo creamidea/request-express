@@ -50,6 +50,7 @@ if __name__ == '__main__':
     parser.add_argument('-i', dest="input_filename", required=True,
                         help='input file')
     parser.add_argument('-o', dest="output_filename",
+                        default="result.txt",
                         help='output file [default: result.txt]')
     args = parser.parse_args()
 
